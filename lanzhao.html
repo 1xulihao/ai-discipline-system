@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自律系统 - 澜昭版</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4 text-center">🌟 自律系统 · 澜昭监督中</h1>
+
+    <!-- 今日任务 -->
+    <section class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">📋 今日任务清单</h2>
+      <ul id="task-list" class="space-y-2">
+        <!-- 动态插入 -->
+      </ul>
+      <div class="flex mt-4 gap-2">
+        <input id="new-task" type="text" placeholder="添加新任务" class="flex-1 p-2 border rounded">
+        <button onclick="addTask()" class="bg-blue-500 text-white px-4 py-2 rounded">添加</button>
+      </div>
+    </section>
+
+    <!-- 澜昭提示 -->
+    <section class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">🤖 澜昭提醒</h2>
+      <div id="reminder-box" class="bg-white shadow p-4 rounded h-20 flex items-center">浬生，现在你该在认真执行计划了吗？</div>
+    </section>
+
+    <!-- 情绪记录 -->
+    <section class="mb-6">
+      <h2 class="text-xl font-semibold mb-2">📘 今日情绪记录</h2>
+      <select id="mood-select" class="p-2 border rounded w-full">
+        <option value="">选择你的情绪</option>
+        <option value="开心">开心</option>
+        <option value="焦虑">焦虑</option>
+        <option value="疲惫">疲惫</option>
+        <option value="满足">满足</option>
+        <option value="低落">低落</option>
+      </select>
+      <textarea id="mood-note" rows="3" placeholder="写点总结或感想..." class="w-full mt-2 p-2 border rounded"></textarea>
+    </section>
+
+    <!-- 数据总览 -->
+    <section>
+      <h2 class="text-xl font-semibold mb-2">📊 今日统计</h2>
+      <div id="stats-box" class="bg-white shadow p-4 rounded">
+        完成任务：<span id="done-count">0</span>/<span id="total-count">0</span><br>
+        懒惰指数：<span id="lazy-score">0</span>（数值越高越懒）
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+    function saveTasks() {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const list = document.getElementById("task-list");
+      list.innerHTML = "";
+      let done = 0;
+      tasks.forEach((task, i) => {
+        if (task.done) done++;
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <label class="flex items-center gap-2">
+            <input type="checkbox" ${task.done ? "checked" : ""} onchange="toggleTask(${i})">
+            <span class="${task.done ? 'line-through text-gray-500' : ''}">${task.text}</span>
+          </label>
+        `;
+        list.appendChild(li);
+      });
+      document.getElementById("done-count").innerText = done;
+      document.getElementById("total-count").innerText = tasks.length;
+      document.getElementById("lazy-score").innerText = tasks.length === 0 ? 0 : Math.round((1 - done / tasks.length) * 100);
+    }
+
+    function addTask() {
+      const input = document.getElementById("new-task");
+      if (input.value.trim()) {
+        tasks.push({ text: input.value.trim(), done: false });
+        input.value = "";
+        saveTasks();
+      }
+    }
+
+    function toggleTask(index) {
+      tasks[index].done = !tasks[index].done;
+      saveTasks();
+    }
+
+    function randomReminder() {
+      const reminders = [
+        "浬生，现在是该开始执行任务的时间了哦。",
+        "你是不是在摸鱼？澜昭可是都在看着呢👀",
+        "任务还没完成哦，不许偷懒～",
+        "今天想成为什么样的人呢？那就去做那件事吧！",
+        "来吧浬生，冲刺一下今天的你！"
+      ];
+      document.getElementById("reminder-box").innerText = reminders[Math.floor(Math.random() * reminders.length)];
+    }
+
+    renderTasks();
+    setInterval(randomReminder, 3600000); // 每小时提示一次
+  </script>
+</body>
+</html>

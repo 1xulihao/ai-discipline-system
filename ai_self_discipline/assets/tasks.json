@@ -1,0 +1,11 @@
+[
+  {
+    "title": "开始",
+    "start_time": "22:43",
+    "duration_minutes": 5,
+    "start_mode": "fixed_start",
+    "complete_mode": "duration_based",
+    "repeat_mode": "one_time",
+    "track_mode": "user_mark"
+  }
+]

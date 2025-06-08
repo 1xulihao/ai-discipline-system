@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI便签 · 日视图</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#fdf8f3] text-gray-800 font-sans flex justify-center items-start p-8">
+  <div class="w-[420px] rounded-2xl border border-gray-300 shadow-xl bg-white p-4">
+    <!-- 顶部欢迎语 -->
+    <div class="text-xl font-bold mb-2 flex items-center justify-between">
+      <div><span class="mr-2">🌞</span>早安，浬生</div>
+      <div class="text-2xl">🤖</div>
+    </div>
+    <div class="text-sm text-gray-500 mb-4">今天你的安排在这里 👇</div>
+
+    <!-- 时间轴 -->
+    <div class="space-y-3">
+      <!-- 任务块 -->
+      <div class="border-l-4 border-green-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">07:00</div>
+        <div class="font-medium">起床 ⏰</div>
+        <div class="text-xs text-green-600 mt-1">✅ 已完成</div>
+      </div>
+
+      <div class="border-l-4 border-blue-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">08:30</div>
+        <div class="font-medium">公交上学习日语 📚</div>
+        <div class="text-xs text-blue-600 mt-1">🚍 未开始（设提醒）</div>
+      </div>
+
+      <div class="border-l-4 border-yellow-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">11:00</div>
+        <div class="font-medium">写论文 🧠</div>
+        <div class="text-xs text-yellow-600 mt-1">🤖 AI提示：昨天完成60%</div>
+      </div>
+
+      <div class="border-l-4 border-gray-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">13:00</div>
+        <div class="font-medium">理发 🧼</div>
+        <div class="text-xs text-gray-500 mt-1">🕒 即将开始</div>
+      </div>
+
+      <div class="border-l-4 border-red-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">19:00</div>
+        <div class="font-medium">健身 💪</div>
+        <div class="text-xs text-red-600 mt-1">⚠️ 昨天未完成，记得坚持</div>
+      </div>
+
+      <div class="border-l-4 border-purple-400 pl-4 py-2">
+        <div class="text-sm text-gray-400">23:00</div>
+        <div class="font-medium">睡觉 💤</div>
+        <div class="text-xs text-purple-600 mt-1">🔒 锁屏提醒将触发</div>
+      </div>
+    </div>
+
+    <!-- 底部操作栏 -->
+    <div class="mt-6 text-center">
+      <button class="text-blue-600 hover:underline">+ 添加新任务</button>
+      <div class="text-xs text-gray-400 mt-1">或告诉我：“我想早点锻炼”</div>
+    </div>
+  </div>
+</body>
+</html>
